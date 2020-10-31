@@ -1,4 +1,11 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { render } from 'react-dom';
+import { StyleSheet, SafeAreaView , Alert} from 'react-native';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+import { Container, Header, Left, Body, Right, Title ,Text , Button, Picker ,Content ,alert ,Form , Item , Icon ,Card , CardItem} from 'native-base';
 
 
 
@@ -14,62 +21,46 @@ this.state={
       function VerFixed(props){
         let fixed=props.fixed
         if(fixed===true){
-     return <td >Es Fijo</td>
+     return <Text>Es Fijo</Text>
         }else{
-         return <td >No es Fijo</td>
+         return <Text>No es Fijo</Text>
         }
        }
        function VerGlobal(props){
         let global=props.global
         if(global===true){
-     return <td >Es global</td>
+     return <Text>Es global</Text>
         }else{
-         return <td >No es global</td>
+         return <Text>No es global</Text>
         }
        }
        function VerFecha(props){
         let fecha=props.fecha
         if(fecha!=null){
-          return <td>{fecha}</td>
+          return <Text>{fecha}</Text>
         }else{
-          return <td>No hay fecha Registrada</td>
+          return <Text>No hay fecha Registrada</Text>
         }
       }
-      console.log(this.props);
       const proximoFeriado= this.props.proximoFeriado;
+      let contador=0;
       const contenido= proximoFeriado.map(element =>
-      <tr>
-     <th scope="row">{element.countryCode}</th>
-     <td>{element.date}</td>
-     <td>{element.localName}</td>
-     <td>{element.name}</td>
-     <VerFixed fixed={element.fixed}/>
-     <VerGlobal global={element.global}/>
-     <VerFecha fecha={element.launchYear}/>
-    </tr>
+        <Card key={contador++}>
+        <CardItem><Body><Text>Codigo de Pais: {element.countryCode}</Text></Body></CardItem>
+        <CardItem><Body><Text>Fecha: {element.date}</Text></Body></CardItem>
+        <CardItem><Body><Text>Nombre Local: {element.localName}</Text></Body></CardItem>
+        <CardItem><Body><Text>Nombre en ingles: {element.name}</Text></Body></CardItem>
+        <CardItem><Body><Text>Fijo: </Text><VerFixed fixed={element.fixed}/></Body></CardItem>
+        <CardItem><Body><Text>Global: </Text><VerGlobal global={element.global}/></Body></CardItem>
+        <CardItem><Body><Text>Fecha de creacion: </Text><VerFecha fecha={element.launchYear}/></Body></CardItem>
+</Card>
       )
      return(
-        <div>
-           <h2 className="d-flex justify-content-center">Proximos Feriados</h2>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Codigo de Pais</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Nombre local</th>
-      <th scope="col">Nombre en ingles</th>
-      <th scope="col">Fijo</th>
-      <th scope="col">Global</th>
-      <th scope="col">Fecha de creacion</th>
-    </tr>
-  </thead>
-  <tbody>
-   {contenido}
-  </tbody>
-</table>
+      <Container>
+        <Text style={styles.titulos}>Proximos Feriados</Text>
+         {contenido}
+      </Container>
 
-
-        </div>
      )
 
      
@@ -77,3 +68,18 @@ this.state={
 }
 
 export default formProximoFeriado;
+
+
+const styles = StyleSheet.create({
+  titulos: {
+    fontSize:30,
+    alignSelf: "center",
+    fontWeight:'bold',
+    
+  },
+  textContent: {
+    fontSize: 20,
+    color: 'red',
+  },
+});
+

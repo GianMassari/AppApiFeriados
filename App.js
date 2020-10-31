@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { render } from 'react-dom';
-import { StyleSheet, SafeAreaView , ScrollView ,View ,Alert } from 'react-native';
+import { StyleSheet, SafeAreaView  ,View ,Alert , ScrollView } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -33,10 +33,7 @@ export default class App extends React.Component{
       return <AppLoading />;
     }
   return (
-   
-   
       <Container>
-         <ScrollView>
         <Header>
           <Left/>
           <Body>
@@ -44,9 +41,10 @@ export default class App extends React.Component{
           </Body>
           <Right />
         </Header>
-
+        <ScrollView>
+        <View>
         <FormDatos/>
-       
+        </View>
         </ScrollView>
       </Container>
     
@@ -68,10 +66,9 @@ export default class App extends React.Component{
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:'50px',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: 100,
+    color: 'red',
+
   },
   titulo:{
 fontSize:30,

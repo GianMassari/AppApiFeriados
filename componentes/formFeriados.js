@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { render } from 'react-dom';
-import { StyleSheet, SafeAreaView} from 'react-native';
+import { StyleSheet, SafeAreaView ,Alert } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, Header, Left, Body, Right, Title ,Text , Button, Picker ,Content ,alert ,Form , Item , Icon ,Card , CardItem} from 'native-base';
+import { Container, Header, Left, Body, Right, Title ,Text , Button, Picker ,Content ,alert ,Form , Item , Icon ,Card , CardItem, StyleProvider} from 'native-base';
 
 class formFeriados extends React.Component{
 constructor(props){
@@ -43,9 +43,10 @@ render(){
   }
 
   const feriados= this.props.feriado;
+  let contador=0;
   const contenido= feriados.map((element) =>
  
-  <Card>
+  <Card key={contador++}>
             <CardItem><Body><Text>Codigo de Pais: {element.countryCode}</Text></Body></CardItem>
             <CardItem><Body><Text>Fecha: {element.date}</Text></Body></CardItem>
             <CardItem><Body><Text>Nombre Local: {element.localName}</Text></Body></CardItem>
@@ -59,17 +60,30 @@ render(){
   
 
 return(
+
      <Container>
-       <Title>Feriados del año</Title>
-       <Title>Cantidad de Feriados: {this.props.cantidad}</Title>
-       <Content>
+       <Text style={styles.titulos}>Feriados del año</Text>
+       <Text style={styles.titulos}>Cantidad de Feriados: {this.props.cantidad}</Text>
         {contenido}
-        </Content>
      </Container>
+
   )
 }
 }
 export default formFeriados;
+
+const styles = StyleSheet.create({
+  titulos: {
+    fontSize:30,
+    alignSelf: "center",
+    fontWeight:'bold',
+    
+  },
+  textContent: {
+    fontSize: 20,
+    color: 'red',
+  },
+});
 
 
  

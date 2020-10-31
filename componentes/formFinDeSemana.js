@@ -1,4 +1,11 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { render } from 'react-dom';
+import { StyleSheet, SafeAreaView , Alert } from 'react-native';
+import { AppLoading } from 'expo';
+import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
+import { Container, Header, Left, Body, Right, Title ,Text , Button, Picker ,Content ,alert ,Form , Item , Icon ,Card , CardItem} from 'native-base';
 
 class formFinDeSemana extends React.Component{
 constructor(props){
@@ -11,39 +18,32 @@ this.state={
       function VerPuente(props){
 let needBridgeDay=props.needBridgeDay;
 if(needBridgeDay){
-return <td>Con Feriado Puente</td>
+return <Text>Con Feriado Puente</Text>
 }else{
-  return <td>Sin Feriado Puente</td>
+  return <Text>Sin Feriado Puente</Text>
 }
-      }
-      const finDeSemana= this.props.finDeSemana;
-      console.log(finDeSemana)
+ }
+  const finDeSemana= this.props.finDeSemana;
+  let contador=0;
   const contenido = finDeSemana.map((element) =>
-  <tr>
-  <th scope="row">{element.startDate}</th>
-  <td>{element.endDate}</td>
-  <td>{element.dayCount}</td>
-  <VerPuente needBridgeDay={element.needBridgeDay}/>
- </tr>
+ 
+ <Card key={contador++}>
+            <CardItem><Body><Text>Fecha de inicio: {element.startDate}</Text></Body></CardItem>
+            <CardItem><Body><Text>Fecha de fin: {element.endDate}</Text></Body></CardItem>
+            <CardItem><Body><Text>Dias: {element.dayCount}</Text></Body></CardItem>
+            <CardItem><Body><Text>Feriado Puente: <VerPuente needBridgeDay={element.needBridgeDay}/></Text></Body></CardItem>
 
+  </Card>
   )
      return(
-        <div>
-          <h2 className="d-flex justify-content-center">Fines de Semanas</h2>
-<table class="table table-bordered">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Fecha de inicio</th>
-      <th scope="col">Fecha de fin</th>
-      <th scope="col">Dias</th>
-      <th scope="col">Feriado Puente</th>
-    </tr>
-  </thead>
-  <tbody>
-    {contenido}
-  </tbody>
-</table>
-        </div>
+
+      <Container>
+        <Content>
+        <Text style={styles.titulos}>Fines de Semanas</Text>
+         {contenido}
+         </Content>
+      </Container>
+     
      )
 
      
@@ -51,3 +51,17 @@ return <td>Con Feriado Puente</td>
 }
 
 export default formFinDeSemana;
+
+const styles = StyleSheet.create({
+  titulos: {
+    fontSize:30,
+    alignSelf: "center",
+    fontWeight:'bold',
+    
+  },
+  textContent: {
+    fontSize: 20,
+    color: 'red',
+  },
+});
+
